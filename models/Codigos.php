@@ -18,55 +18,7 @@ class Codigos extends CI_Model
         parent::__construct();
     }
 
-		// public function generarQR($data, $config)
-    // {
-		// 		creo el directorio sino existe
-    //     $dir = COD.'temp/codigosQR/';
-
-    //     $dir = base_url().'application/modules/'.COD.'temp/codigosQR/';
-
-    //     $permisos = decoct('%o', fileperms('http://localhost/traz-tools/'), -4);
-    //     clearstatcache();
-    //     if (!file_exists($dir)) {
-    //       mkdir($dir);
-    //       $directorio = mkdir($dir, 0775);
-    //     }
-
-
-    //     $archivo = '[' . $config['titulo'] . ']' . 'QR.png';
-    //     $archivo = str_replace('/', '_', $archivo);
-    //     $archivo = str_replace(':', '_', $archivo);
-    //     $archivo = str_replace('*', '_', $archivo);
-    //     $archivo = str_replace('|', '_', $archivo);
-    //     $archivo = str_replace('<', '_', $archivo);
-    //     $archivo = str_replace('>', '_', $archivo);
-    //     $archivo = str_replace('?', '_', $archivo);
-    //     $archivo = str_replace('"', '_', $archivo);
-    //     $archivo = "archivo_QR.png";
-    //     unlink($archivo);
-    //     $filename = $dir . $archivo;
-    //     $filename = $archivo;
-
-    //     /* PARAMETROS DEL CODIGO QR*/
-    //     $tamano = $config['tamaño']; //Tamaño de Pixel
-    //     $level = $config['level']; //Precisión: L(Baja) ; M(Media) ; Q(Alta) ; H(máxima)
-    //     $framSize = $config['framSize']; //Tamaño en blanco, borde
-    //     $contenido = $config['titulo'];
-    //     foreach ($data as $key => $value) {
-    //       $contenido .= "\n".$key.": ".$value;
-    //     }
-
-    //     Generar código QR
-    //     QRcode::png($contenido, $filename, $level, $tamano, $framSize);
-
-    //     $rsp = $data;
-    //     $rsp['filename'] = $filename;
-    //     $rsp['dir'] = $dir;
-
-    //     return $rsp;
-    // }
-
-    public function generarQR($data, $config)
+		public function generarQR($data, $config)
     {
 				// creo el directorio sino existe
         $dir = 'codigosQR/Traz-comp-Yudica';
