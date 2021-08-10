@@ -9,8 +9,6 @@ class Codigo extends CI_Controller
         $this->load->model( COD.'Codigos' );
     }
 
-
-
 		/**
 		* Genera codigos Qr a artir de info recibida
 		* @param array con datos
@@ -20,14 +18,11 @@ class Codigo extends CI_Controller
 
 				$data = $this->input->post('data');
 				$config = $this->input->post('config');
-				
+
 				log_message('DEBUG','#TRAZA|TRAZ-COMP-CODIGOS|generarQR()| $data >> '.json_encode($data));
 
 				$resp = $this->Codigos->generarQR($data, $config);
 				echo json_encode($resp);
 		}
-
-
-
 
 }

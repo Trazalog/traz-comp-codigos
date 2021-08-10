@@ -3,15 +3,16 @@
     <div class='modal-content'>
       <div class='modal-header'>
         <button type='button' class='close' onclick='cierraModalImpresion()' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-        <h4 class='modal-title' id='myModalLabel'>Impresion de Etiqueta</h4>
+        <h4 class='modal-title' id='myModalLabel'>Impresión de Etiqueta</h4>
       </div>
       <div class='modal-body modalBodyCodigos' id='modalBodyCodigos'>
 
+          <!-- Info q va en la cabecera del modal -->
           <div id="infoEtiqueta"></div>
-
-          <div class="center-block" id="contenedorCodigo">
-              <!-- <img class="center-block" id="codigoImage" src="" alt="codigo qr" width="100" height="100"> -->
-          </div>
+          <!-- contenedor del codigo QR -->
+          <div class="center-block" id="contenedorCodigo"></div>
+          <!-- Info qe va abajodel QR -->
+          <div id="infoFooter"></div>
 
       </div>
       <div class='modal-footer'>
@@ -59,12 +60,14 @@
       var base = "<?php echo base_url()?>";
       $('.modalBodyCodigos').printThis(
           {
-            // debug: true,
-            // importCSS: true,
+             debug: true,
+            importCSS: true,
             // importStyle: true,
             pageTitle : "TRAZALOG TOOLS",
+            removeInline: true,
             //header: "<h1 style='text-align: center;'>Reporte Articulos Vencidos</h1>",
-            loadCSS: "<?php echo base_url('lib/bower_components/bootstrap/dist/css/bootstrap.min.css')?>",
+            // loadCSS: "<?php echo base_url('lib/props/codigos-impresiones/alm-proc-yudica/yudica.css')?>",
+            loadCSS: "localhost/traz-tools/lib/props/codigos-impresiones/alm-proc-yudica/yudica.css",
             //copyTagClasses: true,
             base: base
 
