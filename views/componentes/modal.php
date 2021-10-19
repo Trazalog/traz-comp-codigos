@@ -10,8 +10,8 @@
 
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-4" id="infoEtiqueta"></div>
-                        <div class="col-md-8 col-md-offset-4 center-block"  id="contenedorCodigo"></div>
+                        <div class="col-md-12" id="infoEtiqueta"></div>
+                        <div class="col-md-4 col-md-offset-4"  id="contenedorCodigo"></div>
                     </div>
                     <!-- Info qe va abajo del QR -->
                     <div id="infoFooter"></div>
@@ -24,7 +24,6 @@
         </div>
     </div>
 </div>
-
 <script>
 // levanta el modal
 function verModalImpresion(titulo) {
@@ -45,9 +44,10 @@ function getQR(config, data) {
         success: function(result) {
 
             if (result != null) {
+                //class="col-xs-12 col-sm-12  col-md-12  col-lg-12"
                 var qr =
-                    '<img class="col-xs-12 col-sm-12  col-md-12  col-lg-12" id="codigoImage" src="' +
-                    result.filename + '" alt="codigo qr" width="80" height="80">';
+                    '<img cass="center-block"  id="codigoImage" src="' +
+                    result.filename + '" alt="codigo qr" width="100" height="100">';
                 // agrego codigo Qr al modal
                 $('#contenedorCodigo').append(qr);
                 //$('#codigoImage').attr('src', result.filename);
@@ -67,18 +67,17 @@ function imprimirInfoQR() {
     $('.modalBodyCodigos').printThis({
         debug: true,
         importCSS: true,
-        // importStyle: true,
+         importStyle: false,
         pageTitle: "TRAZALOG TOOLS",
         printContainer: true,
         removeInline: true,
         //header: "<h1 style='text-align: center;'>Reporte Articulos Vencidos</h1>",
         loadCSS: "<?php echo base_url('lib/props/codigos-impresiones/alm-proc-yudica/yudica.css')?>",
-        // loadCSS: "localhost/traz-tools/lib/props/codigos-impresiones/alm-proc-yudica/yudica.css",
+       //  loadCSS: "localhost/traz-tools/lib/props/codigos-impresiones/alm-proc-yudica/yudica.css",
         //copyTagClasses: true,
         base: base
 
     });
-
 
 }
 // cerrar modal
