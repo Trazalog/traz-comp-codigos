@@ -18,16 +18,16 @@ class Codigos extends CI_Model
         parent::__construct();
     }
 
-		public function generarQR($data, $config)
+		public function generarQR($data, $config, $dir)
     {
 				// creo el directorio sino existe
-        $dir = 'codigosQR/Traz-comp-Yudica';
+        // $dir = 'codigosQR/Traz-comp-Yudica';
 
         if (!file_exists($dir)) {
 
             $folder = mkdir($dir, 0777, TRUE);
             if ($folder) {
-                log_message('INFO','#TRAZA|#TRAZA|TRAZ-COMP-CODIGOS|generarQR($data, $config)| >> El folder no fue creado (o existia o no se pdo crear... Ver permisos de Server');
+                log_message('DEBUG','#TRAZA|TRAZ-COMP-CODIGOS|generarQR($data, $config, $dir)| >> El folder no fue creado (o existia o no se pdo crear... Ver permisos de Server');
             }
         }
 
@@ -42,8 +42,8 @@ class Codigos extends CI_Model
         $archivo = str_replace('"', '_', $archivo);
         $archivo = str_replace(' ', '_', $archivo);
         //$archivo = "archivo_QR.png";
-        unlink($archivo);
         $filename = $dir .'/'. $archivo;
+        unlink($filename);
         //$filename = $archivo;
 
         /* PARAMETROS DEL CODIGO QR*/
@@ -58,8 +58,9 @@ class Codigos extends CI_Model
         //Generar código QR
         QRcode::png($contenido, $filename, $level, $pixel, $framSize);
 
+        //El randomize concatenado es para que el navegador tome el cambio en el servidor y actualice el QR
         $rsp = $data;
-        $rsp['filename'] = $filename;
+        $rsp['filename'] = $filename . "?". rand(1, 3000);
         $rsp['dir'] = $dir;
 
         return $rsp;

@@ -11,7 +11,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12" id="infoEtiqueta"></div>
-                        <div class="col-md-4 col-md-offset-4"  id="contenedorCodigo"></div>
+                        <div class="col-md-12"  id="contenedorCodigo"></div>
                     </div>
                     <!-- Info qe va abajo del QR -->
                     <div id="infoFooter"></div>
@@ -31,26 +31,24 @@ function verModalImpresion(titulo) {
     $("#modalCodigos").modal('show');
 }
 // trae codigo QR con los datos recibidos y agrega en modal
-function getQR(config, data) {
+function getQR(config, data, direccion) {
 
     $.ajax({
         type: 'POST',
         dataType: 'json',
         data: {
             config,
-            data
+            data,
+            direccion
         },
         url: 'index.php/<?php echo COD ?>Codigo/generarQR',
         success: function(result) {
 
             if (result != null) {
-                //class="col-xs-12 col-sm-12  col-md-12  col-lg-12"
-                var qr =
-                    '<img cass="center-block"  id="codigoImage" src="' +
-                    result.filename + '" alt="codigo qr" width="100" height="100">';
+                var qr = '<img class="center-block"  id="codigoImage" src="' + result.filename + '" alt="codigo qr">';
+
                 // agrego codigo Qr al modal
                 $('#contenedorCodigo').append(qr);
-                //$('#codigoImage').attr('src', result.filename);
             }
         },
         error: function(result) {
