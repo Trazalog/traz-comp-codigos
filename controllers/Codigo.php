@@ -11,17 +11,18 @@ class Codigo extends CI_Controller
 
 		/**
 		* Genera codigos Qr a artir de info recibida
-		* @param array con datos
+		* @param array con datos para el contenido del QR, $config configuracion de los parametros del QR, $direccion ubicacion en donde se generan los QR
 		* @return url donde esta guardado el QR generado
 		*/
 		public function generarQR(){
 
 				$data = $this->input->post('data');
 				$config = $this->input->post('config');
+				$direccion = $this->input->post('direccion');
 
 				log_message('DEBUG','#TRAZA|TRAZ-COMP-CODIGOS|generarQR()| $data >> '.json_encode($data));
 
-				$resp = $this->Codigos->generarQR($data, $config);
+				$resp = $this->Codigos->generarQR($data, $config, $direccion);
 				echo json_encode($resp);
 		}
 
