@@ -63,9 +63,9 @@ function getQR(config, data, direccion) {
 function imprimirInfoQR() {
     var base = "<?php echo base_url()?>";
     $('.modalBodyCodigos').printThis({
-        debug: true,
+        debug: false,
         importCSS: true,
-         importStyle: false,
+        importStyle: false,
         pageTitle: "TRAZALOG TOOLS",
         printContainer: true,
         removeInline: true,
@@ -73,8 +73,10 @@ function imprimirInfoQR() {
         loadCSS: "<?php echo base_url('lib/props/codigos-impresiones/alm-proc-yudica/yudica.css')?>",
        //  loadCSS: "localhost/traz-tools/lib/props/codigos-impresiones/alm-proc-yudica/yudica.css",
         //copyTagClasses: true,
+        afterPrint: function() {
+            cierraModalImpresion();
+        },
         base: base
-
     });
 
 }
