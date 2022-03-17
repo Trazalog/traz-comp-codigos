@@ -32,7 +32,7 @@ function verModalImpresion(titulo) {
 }
 // trae codigo QR con los datos recibidos y agrega en modal
 function getQR(config, data, direccion) {
-
+debugger;
     $.ajax({
         type: 'POST',
         dataType: 'json',
@@ -65,13 +65,12 @@ function imprimirInfoQR() {
     $('.modalBodyCodigos').printThis({
         debug: false,
         importCSS: true,
-        importStyle: false,
+        importStyle: true,
         pageTitle: "TRAZALOG TOOLS",
         printContainer: true,
         removeInline: true,
         //header: "<h1 style='text-align: center;'>Reporte Articulos Vencidos</h1>",
-        loadCSS: "<?php echo base_url('lib/props/codigos-impresiones/alm-proc-yudica/yudica.css')?>",
-       //  loadCSS: "localhost/traz-tools/lib/props/codigos-impresiones/alm-proc-yudica/yudica.css",
+        //loadCSS: "<?php // echo base_url('lib/props/codigos-impresiones/alm-proc-yudica/yudica.css')?>",
         //copyTagClasses: true,
         afterPrint: function() {
             cierraModalImpresion();
