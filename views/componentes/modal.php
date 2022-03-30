@@ -10,8 +10,8 @@
 
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-4" id="infoEtiqueta"></div>
-                        <div class="col-md-8 col-md-offset-4 center-block"  id="contenedorCodigo"></div>
+                        <div class="col-md-12" id="infoEtiqueta"></div>
+                        <div class="col-md-12"  id="contenedorCodigo"></div>
                     </div>
                     <!-- Info qe va abajo del QR -->
                     <div id="infoFooter"></div>
@@ -24,7 +24,6 @@
         </div>
     </div>
 </div>
-
 <script>
 // levanta el modal
 function verModalImpresion(titulo) {
@@ -32,25 +31,24 @@ function verModalImpresion(titulo) {
     $("#modalCodigos").modal('show');
 }
 // trae codigo QR con los datos recibidos y agrega en modal
-function getQR(config, data) {
-
+function getQR(config, data, direccion) {
+debugger;
     $.ajax({
         type: 'POST',
         dataType: 'json',
         data: {
             config,
-            data
+            data,
+            direccion
         },
         url: 'index.php/<?php echo COD ?>Codigo/generarQR',
         success: function(result) {
 
             if (result != null) {
-                var qr =
-                    '<img class="col-xs-12 col-sm-12  col-md-12  col-lg-12" id="codigoImage" src="' +
-                    result.filename + '" alt="codigo qr" width="80" height="80">';
+                var qr = '<img class="center-block"  id="codigoImage" src="' + result.filename + '" alt="codigo qr">';
+
                 // agrego codigo Qr al modal
                 $('#contenedorCodigo').append(qr);
-                //$('#codigoImage').attr('src', result.filename);
             }
         },
         error: function(result) {
@@ -65,20 +63,20 @@ function getQR(config, data) {
 function imprimirInfoQR() {
     var base = "<?php echo base_url()?>";
     $('.modalBodyCodigos').printThis({
-        debug: true,
+        debug: false,
         importCSS: true,
-        // importStyle: true,
+        importStyle: true,
         pageTitle: "TRAZALOG TOOLS",
         printContainer: true,
         removeInline: true,
         //header: "<h1 style='text-align: center;'>Reporte Articulos Vencidos</h1>",
-        loadCSS: "<?php echo base_url('lib/props/codigos-impresiones/alm-proc-yudica/yudica.css')?>",
-        // loadCSS: "localhost/traz-tools/lib/props/codigos-impresiones/alm-proc-yudica/yudica.css",
+        //loadCSS: "<?php // echo base_url('lib/props/codigos-impresiones/alm-proc-yudica/yudica.css')?>",
         //copyTagClasses: true,
+        afterPrint: function() {
+            cierraModalImpresion();
+        },
         base: base
-
     });
-
 
 }
 // cerrar modal
