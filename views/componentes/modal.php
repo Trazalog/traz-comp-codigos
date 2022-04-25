@@ -1,3 +1,4 @@
+
 <div class='modal fade' id='modalCodigos' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
     <div class='modal-dialog'  role='document'>
         <div class='modal-content'>
@@ -9,10 +10,10 @@
             <div class='modal-body modalBodyCodigos' id='modalBodyCodigos'>
 
                 <div class="container-fluid">
-                    <div class="row">
+                     <div class="row"> 
                         <div class="col-md-12" id="infoEtiqueta"></div>
                         <div class="col-md-12"  id="contenedorCodigo"></div>
-                    </div>
+                      </div> 
                     <!-- Info qe va abajo del QR -->
                     <div id="infoFooter"></div>
                 </div>
@@ -32,7 +33,7 @@ function verModalImpresion(titulo) {
 }
 // trae codigo QR con los datos recibidos y agrega en modal
 function getQR(config, data, direccion) {
-debugger;
+// debugger;
     $.ajax({
         type: 'POST',
         dataType: 'json',
@@ -45,7 +46,7 @@ debugger;
         success: function(result) {
 
             if (result != null) {
-                var qr = '<img class="center-block"  id="codigoImage" src="' + result.filename + '" alt="codigo qr">';
+                var qr = '<img  id="codigoImage" src="' + result.filename + '" alt="codigo qr" >';
 
                 // agrego codigo Qr al modal
                 $('#contenedorCodigo').append(qr);
@@ -64,14 +65,14 @@ function imprimirInfoQR() {
     var base = "<?php echo base_url()?>";
     $('.modalBodyCodigos').printThis({
         debug: false,
-        importCSS: true,
+        importCSS: false,
         importStyle: true,
         pageTitle: "TRAZALOG TOOLS",
         printContainer: true,
         removeInline: true,
         //header: "<h1 style='text-align: center;'>Reporte Articulos Vencidos</h1>",
-        //loadCSS: "<?php // echo base_url('lib/props/codigos-impresiones/alm-proc-yudica/yudica.css')?>",
-        //copyTagClasses: true,
+         loadCSS: "<?php  echo base_url('lib/props/codigos-impresiones/alm-proc-yudica/yudica.css')?>",
+        // copyTagClasses: true,
         afterPrint: function() {
             cierraModalImpresion();
         },
