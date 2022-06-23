@@ -1,6 +1,5 @@
-
 <div class='modal fade' id='modalCodigos' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
-    <div class='modal-dialog'  role='document'>
+    <div class='modal-dialog' role='document'>
         <div class='modal-content'>
             <div class='modal-header'>
                 <button type='button' class='close' onclick='cierraModalImpresion()' aria-label='Close'><span
@@ -10,10 +9,10 @@
             <div class='modal-body modalBodyCodigos' id='modalBodyCodigos'>
 
                 <div class="container-fluid">
-                     <div class="row"> 
+                    <div class="row">
                         <div class="col-md-12" id="infoEtiqueta"></div>
-                        <div class="col-md-12"  id="contenedorCodigo"></div>
-                      </div> 
+                        <div class="col-md-12" id="contenedorCodigo"></div>
+                    </div>
                     <!-- Info qe va abajo del QR -->
                     <div id="infoFooter"></div>
                 </div>
@@ -31,9 +30,10 @@ function verModalImpresion(titulo) {
     // levanto modal con img de Codigo
     $("#modalCodigos").modal('show');
 }
+
 // trae codigo QR con los datos recibidos y agrega en modal
 function getQR(config, data, direccion) {
-// debugger;
+    // debugger;
     $.ajax({
         type: 'POST',
         dataType: 'json',
@@ -71,10 +71,30 @@ function imprimirInfoQR() {
         printContainer: true,
         removeInline: true,
         //header: "<h1 style='text-align: center;'>Reporte Articulos Vencidos</h1>",
-         loadCSS: "<?php  echo base_url('lib/props/codigos-impresiones/alm-proc-yudica/yudica.css')?>",
+        loadCSS: "<?php  echo base_url('lib/props/codigos-impresiones/alm-proc-yudica/yudica.css')?>",
         // copyTagClasses: true,
         afterPrint: function() {
             cierraModalImpresion();
+
+            const confirm = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false
+            });
+
+            confirm.fire({
+                title: 'Hecho',
+                text: "la impresion fue cancelada!",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonText: 'Hecho'
+            }).then((result) => {
+                // $("#modalCodigos").modal('hide');
+                linkTo();
+
+            });
+
         },
         base: base
     });
@@ -84,5 +104,8 @@ function imprimirInfoQR() {
 function cierraModalImpresion() {
     // levanto modal con img de Codigo
     $("#modalCodigos").modal('hide');
+    $('.modal-backdrop').remove();
+    linkTo();
+
 }
 </script>
