@@ -85,7 +85,7 @@ function imprimirInfoQR() {
 
             confirm.fire({
                 title: 'Hecho',
-                text: "la impresion fue cancelada!",
+                text: "",
                 type: 'success',
                 showCancelButton: false,
                 confirmButtonText: 'Hecho'
