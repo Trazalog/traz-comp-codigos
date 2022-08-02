@@ -46,4 +46,3 @@ class Codigo extends CI_Controller
 
 
 }
-generarQRlite
