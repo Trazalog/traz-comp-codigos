@@ -42,7 +42,7 @@ function getQR(config, data, direccion) {
             data,
             direccion
         },
-        url: 'index.php/<?php echo COD ?>Codigo/generarQRlite',
+        url: 'index.php/<?php echo COD ?>Codigo/generarQR',
         success: function(result) {
 
             if (result != null) {
