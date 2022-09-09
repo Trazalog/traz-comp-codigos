@@ -50,7 +50,10 @@ class Url extends CI_Controller
         * Genera y guarda un nuevo token para una funcionalidad determinada
         * @author rruiz
         */
-        public function generarLink($funcionalidad, $id){
+        public function generarLink(){
+            $funcionalidad  = $this->input->post('funcionsita');
+            $id = $this->input->post('id');
+
 
             log_message("DEBUG","#TRAZA | TRAZ-COMP-CODIGOS| URL | generarLink");
             $token = md5(uniqid() . microtime() . rand()).md5(date('m/d/Y h:i:s a', time()));
@@ -58,8 +61,8 @@ class Url extends CI_Controller
 
             $this->Urls->guardar($funcionalidad,$id,$token);
             log_message("DEBUG","Url generada: ".base_url('/traz-comp-codigos/Url?token='.$token));
-
-            return base_url('/traz-comp-codigos/Url?token='.$token);
+            $rsp['url'] =  base_url('/traz-comp-codigos/Url?token='.$token);
+            echo json_encode($rsp);
 
         }
 
