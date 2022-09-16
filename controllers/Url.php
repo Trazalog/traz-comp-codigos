@@ -51,7 +51,7 @@ class Url extends CI_Controller
         * @author rruiz
         */
         public function generarLink(){
-            $funcionalidad  = $this->input->post('funcionsita');
+            $funcionalidad  = $this->input->post('funcion');
             $id = $this->input->post('id');
 
 
