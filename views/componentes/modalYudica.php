@@ -25,14 +25,13 @@
     </div>
 </div>
 
-
 <div class='modal fade' id='modalCodigosPedido' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
     <div class='modal-dialog' role='document'>
         <div class='modal-content'>
             <div class='modal-header'>
                 <button type='button' class='close' onclick='cierraModalImpresionPedido()' aria-label='Close'><span
                         aria-hidden='true'>&times;</span></button>
-                <h4 class='modal-title' id='myModalLabel'>Impresión de Etiqueta Pedido</h4>
+                <h4 class='modal-title' id='myModalLabel'>Impresión de Etiqueta</h4>
             </div>
             <div class='modal-body modalBodyCodigos' id='modalBodyCodigos'>
 
@@ -47,11 +46,15 @@
             </div>
             <div class='modal-footer'>
                 <button type='button' class='btn btn-default' onclick='cierraModalImpresionPedido()'>Cancelar</button>
-                <button type='button' class='btn btn-primary' onclick='imprimirInfoQR_pedido()'>Imprimir</button>
+                <button type='button' class='btn btn-primary' onclick='imprimirInfoQRpedido()'>Imprimir</button>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
 
 <script>
 // levanta el modal
@@ -60,12 +63,11 @@ function verModalImpresion(titulo) {
     $("#modalCodigos").modal('show');
 }
 
-// levanta el modal Pedido de trabajo
+// levanta el modal
 function verModalImpresionPedido(titulo) {
     // levanto modal con img de Codigo
     $("#modalCodigosPedido").modal('show');
 }
-
 
 
 
@@ -122,14 +124,14 @@ function imprimirInfoQR() {
             });
 
             confirm.fire({
-                title: 'Hecho',
-                text: "",
+               title: 'Impresión de etiqueta',
+                text: "Finalizando impresión",
                 type: 'success',
                 showCancelButton: false,
                 confirmButtonText: 'Hecho'
             }).then((result) => {
                 // $("#modalCodigos").modal('hide');
-                // linkTo();
+ //              linkTo();
 
             });
 
@@ -138,17 +140,11 @@ function imprimirInfoQR() {
     });
 
 }
-// cerrar modal
-function cierraModalImpresion() {
-    // levanto modal con img de Codigo
-    $("#modalCodigos").modal('hide');
-    $('.modal-backdrop').remove();
-    // linkTo();
-}
 
 
+//////////////////////////////////////////////
 // impresion de etiqueta
-function imprimirInfoQR_pedido() {
+function imprimirInfoQRpedido() {
     var base = "<?php echo base_url()?>";
     $('.modalBodyCodigos').printThis({
         debug: false,
@@ -171,14 +167,14 @@ function imprimirInfoQR_pedido() {
             });
 
             confirm.fire({
-                title: 'Hecho',
-                text: "",
+               title: 'Impresión de etiqueta',
+                text: "Finalizando impresión",
                 type: 'success',
                 showCancelButton: false,
                 confirmButtonText: 'Hecho'
             }).then((result) => {
                 // $("#modalCodigos").modal('hide');
-                linkTo();
+              linkTo();
 
             });
 
@@ -187,12 +183,29 @@ function imprimirInfoQR_pedido() {
     });
 
 }
+
+
+
+
+
+// cerrar modal
+function cierraModalImpresion() {
+    // levanto modal con img de Codigo
+    $("#modalCodigos").modal('hide');
+    $('.modal-backdrop').remove();
+//   linkTo();
+
+}
+
 // cerrar modal
 function cierraModalImpresionPedido() {
     // levanto modal con img de Codigo
-    $("#modalCodigosPedido").modal('hide');
+    $("#modalCodigos").modal('hide');
     $('.modal-backdrop').remove();
-    linkTo();
+   linkTo();
 
 }
+
+
+
 </script>
