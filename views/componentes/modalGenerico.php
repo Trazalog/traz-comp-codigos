@@ -33,8 +33,11 @@ function verModalImpresion(titulo) {
 
 // trae codigo QR con los datos recibidos y agrega en modal
 function getQR(config, data, direccion) {
-    // debugger;
-    $.ajax({
+
+    debugger;
+console.log('sale por la funcion gertQR del modalGenerico');
+
+     $.ajax({
         type: 'POST',
         dataType: 'json',
         data: {

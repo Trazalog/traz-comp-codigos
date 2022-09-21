@@ -5,14 +5,14 @@
             <div class='modal-header'>
                 <button type='button' class='close' onclick='cierraModalImpresionPedido()' aria-label='Close'><span
                         aria-hidden='true'>&times;</span></button>
-                <h4 class='modal-title' id='myModalLabel'>Impresión de Etiqueta</h4>
+                <h4 class='modal-title' id='myModalLabel'>Impresión de Etiqueta Pedido</h4>
             </div>
-            <div class='modal-body modalBodyCodigos' id='modalBodyCodigos'>
+            <div class='modal-body modalBodyCodigos' id='modalBodyCodigosPedido'>
 
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12" id="infoEtiqueta"></div>
-                        <div class="col-md-12" id="contenedorCodigo"></div>
+                        <div class="col-md-12" id="contenedorCodigoPedido"></div>
                     </div>
                     <!-- Info qe va abajo del QR -->
                     <div id="infoFooter"></div>
@@ -42,7 +42,8 @@ function verModalImpresionPedido(titulo) {
 
 // trae codigo QR con los datos recibidos y agrega en modal
 function getQR(config, data, direccion) {
-    // debugger;
+    debugger;
+console.log('sale por la funcion gertQR del modalPedidoTrabajo');
     $.ajax({
         type: 'POST',
         dataType: 'json',
@@ -58,7 +59,7 @@ function getQR(config, data, direccion) {
                 var qr = '<img  id="codigoImage" src="' + result.filename + '" alt="codigo qr" >';
 
                 // agrego codigo Qr al modal
-                $('#contenedorCodigo').append(qr);
+                $('#contenedorCodigoPedido').append(qr);
             }
         },
         error: function(result) {
@@ -75,7 +76,7 @@ function getQR(config, data, direccion) {
 // impresion de etiqueta
 function imprimirInfoQRpedido() {
     var base = "<?php echo base_url()?>";
-    $('.modalBodyCodigos').printThis({
+    $('.modalBodyCodigosPedido').printThis({
         debug: false,
         importCSS: false,
         importStyle: true,
@@ -117,7 +118,7 @@ function imprimirInfoQRpedido() {
 // cerrar modal
 function cierraModalImpresionPedido() {
     // levanto modal con img de Codigo
-    $("#modalCodigos").modal('hide');
+    $("#modalCodigosPedido").modal('hide');
     $('.modal-backdrop').remove();
    linkTo();
 
