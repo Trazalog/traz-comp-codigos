@@ -6,13 +6,14 @@
                 <button type='button' class='close' onclick='cierraModalImpresionPedido()' aria-label='Close'><span
                         aria-hidden='true'>&times;</span></button>
                 <h4 class='modal-title' id='myModalLabel'>Impresión de Etiqueta Pedido</h4>
+                <input  id="url_link" name="url_link" type="text"   class="form-control input-md">
             </div>
             <div class='modal-body modalBodyCodigos' id='modalBodyCodigosPedido'>
 
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-12" id="infoEtiqueta"></div>
-                        <div class="col-md-12" id="contenedorCodigoPedido"></div>
+                        <div class="col-md-6" id="infoEtiqueta"></div>
+                        <div class="col-md-6" id="contenedorCodigoPedido"></div>
                     </div>
                     <!-- Info qe va abajo del QR -->
                     <div id="infoFooter"></div>
