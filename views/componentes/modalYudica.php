@@ -115,7 +115,7 @@ function cierraModalImpresion() {
     // levanto modal con img de Codigo
     $("#modalCodigos").modal('hide');
     $('.modal-backdrop').remove();
-//   linkTo();
+   linkTo();
 
 }
 

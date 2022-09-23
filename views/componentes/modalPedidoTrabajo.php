@@ -6,7 +6,7 @@
                 <button type='button' class='close' onclick='cierraModalImpresionPedido()' aria-label='Close'><span
                         aria-hidden='true'>&times;</span></button>
                 <h4 class='modal-title' id='myModalLabel'>Impresión de Etiqueta Pedido</h4>
-                <input  id="url_link" name="url_link" type="text"   class="form-control input-md">
+                <input  id="url_link" name="url_link" type="hidden"   class="form-control input-md">
             </div>
             <div class='modal-body modalBodyCodigos' id='modalBodyCodigosPedido'>
 
