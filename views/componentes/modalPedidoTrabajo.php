@@ -77,7 +77,7 @@ console.log('sale por la funcion gertQR del modalPedidoTrabajo');
 // impresion de etiqueta
 function imprimirInfoQRpedido() {
     var base = "<?php echo base_url()?>";
-    $('.modalBodyCodigosPedido').printThis({
+    $('#modalBodyCodigosPedido').printThis({
         debug: false,
         importCSS: false,
         importStyle: true,
