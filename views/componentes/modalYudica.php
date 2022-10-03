@@ -7,7 +7,6 @@
                 <h4 class='modal-title' id='myModalLabel'>Impresión de Etiqueta</h4>
             </div>
             <div class='modal-body modalBodyCodigos' id='modalBodyCodigos'>
-
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12" id="infoEtiqueta"></div>
@@ -24,24 +23,13 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
 <script>
-// levanta el modal
+// levanta el modal con código armado
 function verModalImpresion(titulo) {
-    // levanto modal con img de Codigo
     $("#modalCodigos").modal('show');
 }
-
-
-
 // trae codigo QR con los datos recibidos y agrega en modal
 function getQR(config, data, direccion) {
-    // debugger;
     $.ajax({
         type: 'POST',
         dataType: 'json',
@@ -71,14 +59,14 @@ function getQR(config, data, direccion) {
 // impresion de etiqueta
 function imprimirInfoQR() {
     var base = "<?php echo base_url()?>";
-    $('.modalBodyCodigos').printThis({
+    $('#modalCodigos #modalBodyCodigos').printThis({
         debug: false,
         importCSS: false,
         importStyle: true,
         pageTitle: "TRAZALOG TOOLS",
         printContainer: true,
         removeInline: true,
-        //header: "<h1 style='text-align: center;'>Reporte Articulos Vencidos</h1>",
+        printDelay: 3000,
         loadCSS: "<?php  echo base_url('lib/props/codigos-impresiones/alm-proc-yudica/yudica.css')?>",
         // copyTagClasses: true,
         afterPrint: function() {
@@ -98,9 +86,7 @@ function imprimirInfoQR() {
                 showCancelButton: false,
                 confirmButtonText: 'Hecho'
             }).then((result) => {
-                // $("#modalCodigos").modal('hide');
- //              linkTo();
-
+                linkTo();
             });
 
         },
@@ -108,19 +94,9 @@ function imprimirInfoQR() {
     });
 
 }
-
-
-// cerrar modal
+// cierra modal y el backdrop del mismo
 function cierraModalImpresion() {
-    // levanto modal con img de Codigo
     $("#modalCodigos").modal('hide');
     $('.modal-backdrop').remove();
-   linkTo();
-
 }
-
-
-
-
-
 </script>
