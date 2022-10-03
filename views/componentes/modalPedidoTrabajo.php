@@ -1,25 +1,27 @@
-<div class='modal fade' id='modalCodigos' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
+
+<div class='modal fade' id='modalCodigosPedido' tabindex='-1' role='dialog' aria-labelledby='myModalLabel'>
     <div class='modal-dialog' role='document'>
         <div class='modal-content'>
             <div class='modal-header'>
-                <button type='button' class='close' onclick='cierraModalImpresion()' aria-label='Close'><span
+                <button type='button' class='close' onclick='cierraModalImpresionPedido()' aria-label='Close'><span
                         aria-hidden='true'>&times;</span></button>
-                <h4 class='modal-title' id='myModalLabel'>Impresión de Etiqueta</h4>
+                <h4 class='modal-title' id='myModalLabel'>Impresión de Etiqueta Pedido</h4>
+                <input  id="url_link" name="url_link" type="hidden"   class="form-control input-md">
             </div>
-            <div class='modal-body modalBodyCodigos' id='modalBodyCodigos'>
+            <div class='modal-body modalBodyCodigos' id='modalBodyCodigosPedido'>
 
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-12" id="infoEtiqueta"></div>
-                        <div class="col-md-12" id="contenedorCodigo"></div>
+                        <div class="col-md-6" id="infoEtiqueta"></div>
+                        <div class="col-md-6" id="contenedorCodigoPedido"></div>
                     </div>
                     <!-- Info qe va abajo del QR -->
                     <div id="infoFooter"></div>
                 </div>
             </div>
             <div class='modal-footer'>
-                <button type='button' class='btn btn-default' onclick='cierraModalImpresion()'>Cancelar</button>
-                <button type='button' class='btn btn-primary' onclick='imprimirInfoQR()'>Imprimir</button>
+                <button type='button' class='btn btn-default' onclick='cierraModalImpresionPedido()'>Cancelar</button>
+                <button type='button' class='btn btn-primary' onclick='imprimirInfoQRpedido()'>Imprimir</button>
             </div>
         </div>
     </div>
@@ -29,19 +31,20 @@
 
 
 
-
 <script>
+
 // levanta el modal
-function verModalImpresion(titulo) {
+function verModalImpresionPedido(titulo) {
     // levanto modal con img de Codigo
-    $("#modalCodigos").modal('show');
+    $("#modalCodigosPedido").modal('show');
 }
 
 
 
 // trae codigo QR con los datos recibidos y agrega en modal
 function getQR(config, data, direccion) {
-    // debugger;
+    debugger;
+console.log('sale por la funcion gertQR del modalPedidoTrabajo');
     $.ajax({
         type: 'POST',
         dataType: 'json',
@@ -57,7 +60,7 @@ function getQR(config, data, direccion) {
                 var qr = '<img  id="codigoImage" src="' + result.filename + '" alt="codigo qr" >';
 
                 // agrego codigo Qr al modal
-                $('#contenedorCodigo').append(qr);
+                $('#contenedorCodigoPedido').append(qr);
             }
         },
         error: function(result) {
@@ -68,10 +71,13 @@ function getQR(config, data, direccion) {
         }
     });
 }
+
+
+//////////////////////////////////////////////
 // impresion de etiqueta
-function imprimirInfoQR() {
+function imprimirInfoQRpedido() {
     var base = "<?php echo base_url()?>";
-    $('.modalBodyCodigos').printThis({
+    $('#modalBodyCodigosPedido').printThis({
         debug: false,
         importCSS: false,
         importStyle: true,
@@ -82,7 +88,7 @@ function imprimirInfoQR() {
         loadCSS: "<?php  echo base_url('lib/props/codigos-impresiones/alm-proc-yudica/yudica.css')?>",
         // copyTagClasses: true,
         afterPrint: function() {
-            cierraModalImpresion();
+            cierraModalImpresionPedido();
 
             const confirm = Swal.mixin({
                 customClass: {
@@ -99,7 +105,7 @@ function imprimirInfoQR() {
                 confirmButtonText: 'Hecho'
             }).then((result) => {
                 // $("#modalCodigos").modal('hide');
- //              linkTo();
+              linkTo();
 
             });
 
@@ -111,15 +117,13 @@ function imprimirInfoQR() {
 
 
 // cerrar modal
-function cierraModalImpresion() {
+function cierraModalImpresionPedido() {
     // levanto modal con img de Codigo
-    $("#modalCodigos").modal('hide');
+    $("#modalCodigosPedido").modal('hide');
     $('.modal-backdrop').remove();
    linkTo();
 
 }
-
-
 
 
 
