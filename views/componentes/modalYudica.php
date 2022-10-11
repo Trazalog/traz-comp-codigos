@@ -86,7 +86,7 @@ function imprimirInfoQR() {
                 showCancelButton: false,
                 confirmButtonText: 'Hecho'
             }).then((result) => {
-                linkTo();
+                // linkTo();
             });
 
         },
