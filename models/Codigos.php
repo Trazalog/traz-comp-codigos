@@ -18,9 +18,8 @@ class Codigos extends CI_Model
         parent::__construct();
     }
 
-		public function generarQR($data, $config, $dir)
-    {
-				// creo el directorio sino existe
+    public function generarQR($data, $config, $dir){
+        // creo el directorio sino existe
         // $dir = 'codigosQR/Traz-comp-Yudica';
 
         if (!file_exists($dir)) {
@@ -66,57 +65,96 @@ class Codigos extends CI_Model
         return $rsp;
     }
 
+    //esta funcion crea el QR sin Label en los campos, se usa para el QR de No consumibles
+    public function generarQRlite($data, $config, $dir){
+        if (!file_exists($dir)) {
 
+            $folder = mkdir($dir, 0777, TRUE);
+            if ($folder) {
+                log_message('DEBUG','#TRAZA|TRAZ-COMP-CODIGOS|generarQR($data, $config, $dir)| >> El folder no fue creado (o existia o no se pdo crear... Ver permisos de Server');
+            }
+        }
 
- //esta funcion crea el QR sin Label en los campos, se usa para el QR de No consumibles
- public function generarQRlite($data, $config, $dir)
- {
-   
+        $archivo =  $config['titulo'] . 'QR.png';
+        $archivo = str_replace('/', '_', $archivo);
+        $archivo = str_replace(':', '_', $archivo);
+        $archivo = str_replace('*', '_', $archivo);
+        $archivo = str_replace('|', '_', $archivo);
+        $archivo = str_replace('<', '_', $archivo);
+        $archivo = str_replace('>', '_', $archivo);
+        $archivo = str_replace('?', '_', $archivo);
+        $archivo = str_replace('"', '_', $archivo);
+        $archivo = str_replace(' ', '_', $archivo);
+        //$archivo = "archivo_QR.png";
+        $filename = $dir .'/'. $archivo;
+        unlink($filename);
+        //$filename = $archivo;
 
-     if (!file_exists($dir)) {
+        /* PARAMETROS DEL CODIGO QR*/
+        $pixel = $config['pixel']; //Tamaño de Pixel
+        $level = $config['level']; //Precisión: L(Baja) ; M(Media) ; Q(Alta) ; H(máxima)
+        $framSize = $config['framSize']; //Tamaño en blanco, borde
+        $contenido = $config['titulo'];
+        
+        foreach ($data as $key => $value) {
+        $contenido = $value;
+        }
+        
+        //Generar código QR
+        QRcode::png($contenido, $filename, $level, $pixel, $framSize);
 
-         $folder = mkdir($dir, 0777, TRUE);
-         if ($folder) {
-             log_message('DEBUG','#TRAZA|TRAZ-COMP-CODIGOS|generarQR($data, $config, $dir)| >> El folder no fue creado (o existia o no se pdo crear... Ver permisos de Server');
-         }
-     }
+        //El randomize concatenado es para que el navegador tome el cambio en el servidor y actualice el QR
+        $rsp = $data;
+        $rsp['filename'] = $filename . "?". rand(1, 3000);
+        $rsp['dir'] = $dir;
 
-     $archivo =  $config['titulo'] . 'QR.png';
-     $archivo = str_replace('/', '_', $archivo);
-     $archivo = str_replace(':', '_', $archivo);
-     $archivo = str_replace('*', '_', $archivo);
-     $archivo = str_replace('|', '_', $archivo);
-     $archivo = str_replace('<', '_', $archivo);
-     $archivo = str_replace('>', '_', $archivo);
-     $archivo = str_replace('?', '_', $archivo);
-     $archivo = str_replace('"', '_', $archivo);
-     $archivo = str_replace(' ', '_', $archivo);
-     //$archivo = "archivo_QR.png";
-     $filename = $dir .'/'. $archivo;
-     unlink($filename);
-     //$filename = $archivo;
+        return $rsp;
+    }
+    /**
+	* Genera codigos Qr con NOMBRES DIFERENTES en la carpeta que se envia por parámetro.
+	* @param array $data con datos para el contenido del QR, $config configuracion de los parametros del QR, $direccion ubicacion en donde se generan los QR
+	* @return url donde esta guardado el QR generado
+	*/
+    public function generarQRMasivo($data, $config, $dir){
+        if (!file_exists($dir)) {
+            $folder = mkdir($dir, 0777, TRUE);
+            if ($folder) {
+                log_message('DEBUG','#TRAZA|TRAZ-COMP-CODIGOS|generarQRMasivo($data, $config, $dir)| >> El folder no fue creado (o existia o no se pdo crear... Ver permisos de Server');
+            }
+        }
 
-     /* PARAMETROS DEL CODIGO QR*/
-     $pixel = $config['pixel']; //Tamaño de Pixel
-     $level = $config['level']; //Precisión: L(Baja) ; M(Media) ; Q(Alta) ; H(máxima)
-     $framSize = $config['framSize']; //Tamaño en blanco, borde
-     $contenido = $config['titulo'];
-     
-     foreach ($data as $key => $value) {
-       $contenido = $value;
-     }
-    
-     //Generar código QR
-     QRcode::png($contenido, $filename, $level, $pixel, $framSize);
+        $archivo =  $config['titulo'] .' _' . rand(1, 10000) . '_QR.png';
+        $archivo = str_replace('/', '_', $archivo);
+        $archivo = str_replace(':', '_', $archivo);
+        $archivo = str_replace('*', '_', $archivo);
+        $archivo = str_replace('|', '_', $archivo);
+        $archivo = str_replace('<', '_', $archivo);
+        $archivo = str_replace('>', '_', $archivo);
+        $archivo = str_replace('?', '_', $archivo);
+        $archivo = str_replace('"', '_', $archivo);
+        $archivo = str_replace(' ', '_', $archivo);
+        //$archivo = "archivo_QR.png";
+        $filename = $dir .'/'. $archivo;
+        unlink($filename);
+        //$filename = $archivo;
 
-     //El randomize concatenado es para que el navegador tome el cambio en el servidor y actualice el QR
-     $rsp = $data;
-     $rsp['filename'] = $filename . "?". rand(1, 3000);
-     $rsp['dir'] = $dir;
+        /* PARAMETROS DEL CODIGO QR*/
+        $pixel = $config['pixel']; //Tamaño de Pixel
+        $level = $config['level']; //Precisión: L(Baja) ; M(Media) ; Q(Alta) ; H(máxima)
+        $framSize = $config['framSize']; //Tamaño en blanco, borde
+        $contenido = $config['titulo'];
+        foreach ($data as $key => $value) {
+          $contenido .= "\n".$key.": ".$value;
+        }
 
-     return $rsp;
- }
+        //Generar código QR
+        QRcode::png($contenido, $filename, $level, $pixel, $framSize);
 
+        //El randomize concatenado es para que el navegador tome el cambio en el servidor y actualice el QR
+        $rsp = $data;
+        $rsp['filename'] = $filename;
+        $rsp['dir'] = $dir;
 
-
+        return $rsp;
+    }
 }
