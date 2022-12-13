@@ -71,7 +71,6 @@ function imprimirInfoQR() {
         // copyTagClasses: true,
         afterPrint: function() {
             cierraModalImpresion();
-
             const confirm = Swal.mixin({
                 customClass: {
                     confirmButton: 'btn btn-primary'
@@ -86,7 +85,10 @@ function imprimirInfoQR() {
                 showCancelButton: false,
                 confirmButtonText: 'Hecho'
             }).then((result) => {
-                // linkTo();
+                //solamente recargo en caso de estar en la pantalla pedido de trabajo
+                if($("#miniView").length == 0){
+                    linkTo();
+                }
             });
 
         },
