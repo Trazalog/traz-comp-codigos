@@ -100,5 +100,8 @@ function imprimirInfoQR() {
 function cierraModalImpresion() {
     $("#modalCodigos").modal('hide');
     $('.modal-backdrop').remove();
+    if($("#miniView").length == 0){
+       linkTo();
+    }
 }
 </script>
