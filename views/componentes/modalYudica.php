@@ -9,8 +9,8 @@
             <div class='modal-body modalBodyCodigos' id='modalBodyCodigos'>
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-12" id="infoEtiqueta"></div>
                         <div class="col-md-12" id="contenedorCodigo"></div>
+                        <div class="col-md-12" id="infoEtiqueta"></div>
                     </div>
                     <!-- Info qe va abajo del QR -->
                     <div id="infoFooter"></div>
@@ -86,9 +86,9 @@ function imprimirInfoQR() {
                 confirmButtonText: 'Hecho'
             }).then((result) => {
                 //solamente recargo en caso de estar en la pantalla pedido de trabajo
-                if($("#miniView").length == 0){
-                    linkTo();
-                }
+                // if($("#miniView").length == 0){
+                //     linkTo();
+                // }
             });
 
         },
@@ -100,8 +100,8 @@ function imprimirInfoQR() {
 function cierraModalImpresion() {
     $("#modalCodigos").modal('hide');
     $('.modal-backdrop').remove();
-    if($("#miniView").length == 0){
-       linkTo();
-    }
+    // if($("#miniView").length == 0){
+    //    linkTo();
+    // }
 }
 </script>
