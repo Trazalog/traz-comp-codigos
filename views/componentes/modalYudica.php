@@ -9,8 +9,8 @@
             <div class='modal-body modalBodyCodigos' id='modalBodyCodigos'>
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-12" id="infoEtiqueta"></div>
                         <div class="col-md-12" id="contenedorCodigo"></div>
+                        <div class="col-md-12" id="infoEtiqueta"></div>
                     </div>
                     <!-- Info qe va abajo del QR -->
                     <div id="infoFooter"></div>
