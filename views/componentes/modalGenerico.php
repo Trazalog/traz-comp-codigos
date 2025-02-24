@@ -9,6 +9,12 @@
             <div class='modal-body modalBodyCodigos' id='modalBodyCodigos'>
 
                 <div class="container-fluid">
+                    <!-- Contenedor para el logo -->
+                    <div  class="logo-container" style="position: absolute; top: 10px; right: 20px; z-index: 10;">
+                        <img id="logo" style = "max-width: 400px; max-height: 200px;" src="" alt="Logo" class="logo-modal">
+                    </div>
+
+                    <!-- Contenedor para QR e info -->
                     <div style="display: flex;align-items: center;" class="row">
                         <div style="text-align: center;" class="col-md-6" id="contenedorCodigo"></div>
                         <div class="col-md-6" id="infoEtiqueta"></div>
