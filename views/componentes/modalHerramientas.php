@@ -68,7 +68,7 @@
                 data: __qrHerramientaData,
                 direccion: __qrHerramientaDireccion
             },
-            url: 'index.php/<?php echo COD ?>Codigo/generarQR',
+            url: 'index.php/<?php echo COD ?>Codigo/generarQRlite',
             success: function(result) {
                 if (result != null) {
                     var qr = '<img id="codigoImageHerramienta" src="' + result.filename + '" alt="codigo qr">';

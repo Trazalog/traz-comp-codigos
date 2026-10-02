@@ -49,7 +49,7 @@ class Urls extends CI_Model
         log_message("DEBUG", "#TRAZA | TRAZ-COMP-CODIGOS| URL | guardar()");
         $post['_post_token'] = array(   
             'funcionalidad' => $funcionalidad,
-            'empr_id' => empresa(),
+            'empr_id' =>  (string) empresa(),
             'id' => $id,
             'token' => $token,
             'usuario_app' => userNick()
